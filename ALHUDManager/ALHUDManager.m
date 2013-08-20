@@ -23,7 +23,7 @@
     if (self) {
         self.hudView = nil;
         [_hudView setHidden:YES];
-		self.imageList = [NSArray arrayWithObjects:@"37x-Checkmark.png", @"hud_sadFace.png", nil];
+		self.imageList = [NSArray arrayWithObjects:@"37x-Checkmark.png", @"hud_sadFace.png", @"star.png", @"heart.png", nil];
 		[self addNotificationObserver];
     }
     return self;

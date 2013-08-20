@@ -24,7 +24,9 @@ typedef enum {
 typedef enum {
 	HUDImage_None = 999,
 	HUDImage_Success = 0,
-	HUDImage_SadFace = 1
+	HUDImage_SadFace = 1,
+    HUDImage_Star = 2,
+    HUDImage_Heart = 3
 } HUDImageType;
 
 #import <Foundation/Foundation.h>

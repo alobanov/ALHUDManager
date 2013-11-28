@@ -12,17 +12,27 @@
 @interface ViewController ()
 
 @property (strong, nonatomic) IBOutlet UIView *hudview;
+@property (nonatomic, strong, readonly) UIControl *overlayView;
 
 @end
 
 @implementation ViewController
 
+@synthesize overlayView;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    
-    [[ALHUDManager defaultManager] updateHudView:_hudview];
+	// Do any additional setup after loading the view, typically from a nib
+}
+
+- (UIControl *)overlayView {
+    if(!overlayView) {
+        overlayView = [[UIControl alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        overlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        overlayView.backgroundColor = [UIColor blackColor];
+    }
+    return overlayView;
 }
 
 - (void)didReceiveMemoryWarning
@@ -38,6 +48,23 @@
     item.dimBackground = YES;
     item.mode = ProgressHUDModeText;
 	[ALHUDManager showHUD:item];
+    
+//    UIView *t = [[UIView alloc] initWithFrame:CGRectMake(0.0, 0.0, 400.0, 400.0)];
+//    [t setBackgroundColor:[UIColor yellowColor]];
+//
+//
+//    if(!self.overlayView.superview){
+//        NSEnumerator *frontToBackWindows = [[[UIApplication sharedApplication]windows]reverseObjectEnumerator];
+//        
+//        for (UIWindow *window in frontToBackWindows)
+//            if (window.windowLevel == UIWindowLevelNormal) {
+//                [window addSubview:self.overlayView];
+//                break;
+//            }
+//    }
+//    
+//    [self.overlayView addSubview:t];
+
 }
 
 @end

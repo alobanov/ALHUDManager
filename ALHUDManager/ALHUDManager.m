@@ -2,7 +2,7 @@
 //  HUDManager.m
 //  evening
 //
-//  Created by Алексей Лобанов on 04.11.12.
+//  Created by Aleksey Lobanov on 04.11.12.
 //  Copyright (c) 2012 avvakumov@east-media.ru. All rights reserved.
 //
 
@@ -10,19 +10,24 @@
 
 @interface ALHUDManager ()
 
+@property (nonatomic, strong, readonly) UIControl *overlayView;
 @property (strong, nonatomic) MBProgressHUD *HUD;
 @property (strong, nonatomic) UIView *hudView;
 @property (strong, nonatomic) NSArray *imageList;
+
+@property (nonatomic, readonly) CGFloat visibleKeyboardHeight;
+@property (nonatomic, assign) UIOffset offsetFromCenter;
 
 @end
 
 @implementation ALHUDManager
 
+@synthesize overlayView;
+
 - (id) init {
     self = [super init];
     if (self) {
         self.hudView = nil;
-        [_hudView setHidden:YES];
 		self.imageList = [NSArray arrayWithObjects:@"37x-Checkmark.png", @"hud_sadFace.png", @"star.png", @"heart.png", nil];
 		[self addNotificationObserver];
     }
@@ -39,6 +44,8 @@
 
 #pragma mark - Public static methods
 + (void) showHUD:(HUDItem*) item {
+    [ALHUDManager defaultManager];
+    
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
 	NSDictionary *hudItemWrapper = [NSDictionary dictionaryWithObject:item forKey:@"HUDItem"];
 	[nc postNotificationName:HUDManager_showHUDItem
@@ -52,29 +59,82 @@
 					  object:nil];
 }
 
-- (void) updateHudView:(UIView *)hudView {
-    self.hudView = hudView;
-    [self.hudView setHidden:YES];
-}
-
 #pragma mark - Notifications register
 - (void) addNotificationObserver {
-	// add notification observer
+	// base alhudmanager notification
 	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(showHUDItem:) name:HUDManager_showHUDItem object: nil];
 	[[NSNotificationCenter defaultCenter] addObserver: self selector: @selector(hideHud:) name:HUDManager_hideHud object: nil];
+    
+    // position of hud notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(positionHUD:)
+                                                 name:UIApplicationDidChangeStatusBarOrientationNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(positionHUD:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(positionHUD:)
+                                                 name:UIKeyboardDidHideNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(positionHUD:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(positionHUD:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:nil];
 
 }
 
 #pragma mark - Create hud
 - (void) createHud {
 	if (_HUD != nil) return;
+    
+    if (!self.hudView) {
+        _hudView = [[UIView alloc] initWithFrame:CGRectZero];
+        _hudView.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin |
+                                    UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleLeftMargin);
+        
+        [_hudView setAutoresizingMask:UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth];
+    }
+    
+    if(!self.overlayView.superview){
+        NSEnumerator *frontToBackWindows = [[[UIApplication sharedApplication]windows]reverseObjectEnumerator];
+        
+        for (UIWindow *window in frontToBackWindows) {
+            if (window.windowLevel == UIWindowLevelNormal) {
+                [window addSubview:self.overlayView];
+                break;
+            }
+        }
+    }
+    
+    if (_hudView)
+    [self.overlayView addSubview:_hudView];
+    [self positionHUD:nil];
 	
 	self.HUD = [[MBProgressHUD alloc] initWithView: _hudView];
-	[_hudView addSubview:_HUD];
+	[self.hudView addSubview:_HUD];
 	_HUD.dimBackground = YES;
 	_HUD.delegate = self;
     [_hudView setHidden:NO];
     [_HUD show:YES];
+}
+
+- (UIControl *)overlayView {
+    if(!overlayView) {
+        overlayView = [[UIControl alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        overlayView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        overlayView.backgroundColor = [UIColor clearColor];
+    }
+    return overlayView;
 }
 
 #pragma mark - Notification callback
@@ -124,8 +184,103 @@
 	// Remove HUD from screen when the HUD was hidded
 	[_HUD removeFromSuperview];
 	self.HUD = nil;
-    [_hudView setHidden:YES];
+    
+    [_hudView removeFromSuperview];
+    _hudView = nil;
+    
+    [overlayView removeFromSuperview];
+    overlayView = nil;
 }
 
+#pragma mark - Notify position of hud
+- (void)positionHUD:(NSNotification*)notification {
+    
+    CGFloat keyboardHeight;
+    double animationDuration;
+    
+    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+    
+    if(notification) {
+        NSDictionary* keyboardInfo = [notification userInfo];
+        CGRect keyboardFrame = [[keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+        animationDuration = [[keyboardInfo valueForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+        
+        if(notification.name == UIKeyboardWillShowNotification || notification.name == UIKeyboardDidShowNotification) {
+            if(UIInterfaceOrientationIsPortrait(orientation))
+                keyboardHeight = keyboardFrame.size.height;
+            else
+                keyboardHeight = keyboardFrame.size.width;
+        } else
+            keyboardHeight = 0;
+    } else {
+        keyboardHeight = self.visibleKeyboardHeight;
+    }
+    
+    CGRect orientationFrame = [UIScreen mainScreen].bounds;
+    CGRect statusBarFrame = [UIApplication sharedApplication].statusBarFrame;
+    
+    if(UIInterfaceOrientationIsLandscape(orientation)) {
+        float temp = orientationFrame.size.width;
+        orientationFrame.size.width = orientationFrame.size.height;
+        orientationFrame.size.height = temp;
+        
+        temp = statusBarFrame.size.width;
+        statusBarFrame.size.width = statusBarFrame.size.height;
+        statusBarFrame.size.height = temp;
+    }
+    
+    CGFloat activeHeight = orientationFrame.size.height;
+    
+    if(keyboardHeight > 0)
+        activeHeight += statusBarFrame.size.height*2;
+    
+    activeHeight -= keyboardHeight;
+    CGFloat posY = floor(activeHeight*0.5);
+    CGFloat posX = orientationFrame.size.width/2;
+    
+    CGPoint newCenter;
+    CGFloat rotateAngle;
+    
+    switch (orientation) {
+        case UIInterfaceOrientationPortraitUpsideDown:
+            rotateAngle = M_PI;
+            newCenter = CGPointMake(posX, orientationFrame.size.height-posY);
+            break;
+        case UIInterfaceOrientationLandscapeLeft:
+            rotateAngle = -M_PI/2.0f;
+            newCenter = CGPointMake(posY, posX);
+            break;
+        case UIInterfaceOrientationLandscapeRight:
+            rotateAngle = M_PI/2.0f;
+            newCenter = CGPointMake(orientationFrame.size.height-posY, posX);
+            break;
+        default: // as UIInterfaceOrientationPortrait
+            rotateAngle = 0.0;
+            newCenter = CGPointMake(posX, posY);
+            break;
+    }
+    
+    if(notification) {
+        [UIView animateWithDuration:animationDuration
+                              delay:0
+                            options:UIViewAnimationOptionAllowUserInteraction
+                         animations:^{
+                             [self moveToPoint:newCenter rotateAngle:rotateAngle];
+                         } completion:NULL];
+    }
+    
+    else {
+        [self moveToPoint:newCenter rotateAngle:rotateAngle];
+    }
+    
+}
+
+- (void)moveToPoint:(CGPoint)newCenter rotateAngle:(CGFloat)angle {
+    self.hudView.transform = CGAffineTransformMakeRotation(angle);
+    
+    float largeSide = MAX([[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
+    [self.hudView setFrame:CGRectMake(0.0, 0.0, largeSide, largeSide)];
+    self.hudView.center = CGPointMake(newCenter.x + self.offsetFromCenter.horizontal, newCenter.y + self.offsetFromCenter.vertical);
+}
 
 @end

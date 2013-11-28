@@ -2,7 +2,7 @@
 //  HUDManager.h
 //  evening
 //
-//  Created by Алексей Лобанов on 04.11.12.
+//  Created by Aleksey Lobanov on 04.11.12.
 //  Copyright (c) 2012 avvakumov@east-media.ru. All rights reserved.
 //
 
@@ -17,10 +17,6 @@
 #define HUDManager_bundleName @"ALHUDIconsResourse"
 
 @interface ALHUDManager : NSObject <MBProgressHUDDelegate>
-
-+ (ALHUDManager *) defaultManager;
-
-- (void) updateHudView:(UIView *)hudView;
 
 + (void) showHUD:(HUDItem*) item;
 + (void) hideHUD;

@@ -29,6 +29,10 @@ typedef enum {
     HUDImage_Heart = 3
 } HUDImageType;
 
+typedef enum {
+    HUDCustomImage_None = 999
+} HUDCustomImage;
+
 #import <Foundation/Foundation.h>
 
 @interface HUDItem : NSObject
@@ -44,5 +48,6 @@ typedef enum {
 @property (assign, nonatomic) float hideDelay;
 @property (assign, nonatomic) BOOL dimBackground;
 @property (assign, nonatomic) ProgressHUDMode mode;
+@property (strong, nonatomic) NSString *hudCustomImagePath;
 
 @end

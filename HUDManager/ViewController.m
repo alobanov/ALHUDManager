@@ -41,4 +41,11 @@
 	[ALHUDManager showHUD:item];
 }
 
+- (IBAction) showWithCustomImage:(id)sender {
+    HUDItem *item = [HUDItem itemWithTitle:@"Nice heart" andDetail:@"Smile bitch!"];
+    item.hudCustomImagePath = @"hudTest.png";
+    item.hideDelay = 7.0;
+    [ALHUDManager showHUD:item];
+}
+
 @end

@@ -19,3 +19,12 @@ item.mode = ProgressHUDModeText;
 // for manually hide
 [ALHUDManager hideHud];
 ```
+
+## Set custom image
+
+```objective-c
+HUDItem *item = [HUDItem itemWithTitle:@"Nice heart" andDetail:@"Smile bitch!"];
+item.hudCustomImagePath = @"hudTest.png";
+item.hideDelay = 7.0;
+[ALHUDManager showHUD:item];
+```

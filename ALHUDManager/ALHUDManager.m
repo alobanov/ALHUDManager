@@ -17,6 +17,7 @@
 
 @property (nonatomic, readonly) CGFloat visibleKeyboardHeight;
 @property (nonatomic, assign) UIOffset offsetFromCenter;
+@property (assign, nonatomic) BOOL isCustomView;
 
 @end
 
@@ -28,6 +29,7 @@
     self = [super init];
     if (self) {
         self.hudView = nil;
+        self.isCustomView = NO;
 		self.imageList = [NSArray arrayWithObjects:@"37x-Checkmark.png", @"hud_sadFace.png", @"star.png", @"heart.png", nil];
 		[self addNotificationObserver];
     }
@@ -40,6 +42,28 @@
         instance = [[ALHUDManager alloc] init];
     }
     return instance;
+}
+
+#pragma mark - Public instance methods
+- (void) updateHudView:(UIView *)hudView {
+    self.isCustomView = (hudView == nil)?NO:YES;
+    self.hudView = hudView;
+}
+
+- (void) showAlwaysOnTop {
+    self.isCustomView = NO;
+    self.hudView = nil;
+}
+
+- (void) setProgress:(float) value {
+    if (!self.HUD) return;
+    
+    [self.HUD setProgress:value];
+}
+
+- (void) setDetailText:(NSString *) text {
+    if (!self.HUD) return;
+    [self.HUD setDetailsLabelText:text];
 }
 
 #pragma mark - Public static methods
@@ -70,33 +94,24 @@
                                              selector:@selector(positionHUD:)
                                                  name:UIApplicationDidChangeStatusBarOrientationNotification
                                                object:nil];
-    
-    //    [[NSNotificationCenter defaultCenter] addObserver:self
-    //                                             selector:@selector(positionHUD:)
-    //                                                 name:UIKeyboardWillHideNotification
-    //                                               object:nil];
-    //
-    //    [[NSNotificationCenter defaultCenter] addObserver:self
-    //                                             selector:@selector(positionHUD:)
-    //                                                 name:UIKeyboardDidHideNotification
-    //                                               object:nil];
-    //
-    //    [[NSNotificationCenter defaultCenter] addObserver:self
-    //                                             selector:@selector(positionHUD:)
-    //                                                 name:UIKeyboardWillShowNotification
-    //                                               object:nil];
-    //
-    //    [[NSNotificationCenter defaultCenter] addObserver:self
-    //                                             selector:@selector(positionHUD:)
-    //                                                 name:UIKeyboardDidShowNotification
-    //                                               object:nil];
-    
 }
 
 #pragma mark - Create hud
 - (void) createHud {
 	if (_HUD != nil) return;
     
+    if (!_isCustomView)
+        [self createModalView];
+	
+	self.HUD = [[MBProgressHUD alloc] initWithView: _hudView];
+	[self.hudView addSubview:_HUD];
+	_HUD.dimBackground = YES;
+	_HUD.delegate = self;
+    [_hudView setHidden:NO];
+    [_HUD show:YES];
+}
+
+- (void) createModalView {
     if (!self.hudView) {
         _hudView = [[UIView alloc] initWithFrame:CGRectZero];
         _hudView.autoresizingMask = (UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin |
@@ -119,13 +134,6 @@
     if (_hudView)
         [self.overlayView addSubview:_hudView];
     [self positionHUD:nil];
-	
-	self.HUD = [[MBProgressHUD alloc] initWithView: _hudView];
-	[self.hudView addSubview:_HUD];
-	_HUD.dimBackground = YES;
-	_HUD.delegate = self;
-    [_hudView setHidden:NO];
-    [_HUD show:YES];
 }
 
 - (UIControl *)overlayView {
@@ -138,9 +146,11 @@
 }
 
 #pragma mark - Notification callback
--(void) hideHud:(NSNotification*) notify {
+- (void) hideHud:(NSNotification*) notify {
     [_hudView setHidden:YES];
 	[_HUD setHidden:YES];
+    
+    [self hudWasHidden:_HUD];
 }
 
 - (void) showHUDItem:(NSNotification *) notify {
@@ -159,15 +169,20 @@
 	[_HUD setDetailsLabelText:item.detail];
     [_HUD setDimBackground:item.dimBackground];
 	
-	if (item.imageType == HUDImage_None) {
-		[_HUD setMode:(int)item.mode];
-	} else {
-		[_HUD setMode:MBProgressHUDModeCustomView];
-        
-        NSString *bundleImageName = [NSString stringWithFormat: @"%@.bundle/%@", HUDManager_bundleName, [_imageList objectAtIndex:item.imageType]];
-        NSString *path = [[NSBundle mainBundle] pathForResource:bundleImageName ofType:nil];
-		_HUD.customView = [[UIImageView alloc] initWithImage:[[UIImage alloc] initWithContentsOfFile:path]];
-	}
+    if (item.hudCustomImagePath) {
+        [_HUD setMode:MBProgressHUDModeCustomView];
+	 	_HUD.customView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:item.hudCustomImagePath]];
+    } else{
+        if (item.imageType == HUDImage_None) {
+            [_HUD setMode:(int)item.mode];
+        } else {
+            [_HUD setMode:MBProgressHUDModeCustomView];
+            
+            NSString *bundleImageName = [NSString stringWithFormat: @"%@.bundle/%@", HUDManager_bundleName, [_imageList objectAtIndex:item.imageType]];
+            NSString *path = [[NSBundle mainBundle] pathForResource:bundleImageName ofType:nil];
+            _HUD.customView = [[UIImageView alloc] initWithImage:[[UIImage alloc] initWithContentsOfFile:path]];
+        }
+    }
 	
 	if (item.mode != MBProgressHUDModeDeterminate &&
 		item.mode != MBProgressHUDModeAnnularDeterminate &&
@@ -181,6 +196,8 @@
 #pragma mark MBProgressHUDDelegate methods
 
 - (void) hudWasHidden:(MBProgressHUD *)hud {
+    if (!hud) return;
+    
 	// Remove HUD from screen when the HUD was hidded
 	[_HUD removeFromSuperview];
 	self.HUD = nil;
@@ -194,7 +211,7 @@
 
 #pragma mark - Notify position of hud
 - (void)positionHUD:(NSNotification*)notification {
-    
+    if (_isCustomView) return;
     CGFloat keyboardHeight;
     double animationDuration;
     

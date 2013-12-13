@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		7901ACD4F8C64B5D8D493C1A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D398CF629DCF49D3A88DA4E7 /* libPods.a */; };
+		E87F8866185AF11E007486D2 /* hudTest.png in Resources */ = {isa = PBXBuildFile; fileRef = E87F8864185AF11E007486D2 /* hudTest.png */; };
+		E87F8867185AF11E007486D2 /* hudTest@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E87F8865185AF11E007486D2 /* hudTest@2x.png */; };
 		E889B46117B8D201002541C2 /* ALHUDIconsResourse.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E889B45C17B8D201002541C2 /* ALHUDIconsResourse.bundle */; };
 		E889B46217B8D201002541C2 /* ALHUDManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E889B45E17B8D201002541C2 /* ALHUDManager.m */; };
 		E889B46317B8D201002541C2 /* HUDItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E889B46017B8D201002541C2 /* HUDItem.m */; };
@@ -28,6 +30,8 @@
 		A9D307CE542944919DCACA86 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 		D398CF629DCF49D3A88DA4E7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E83453AB18473C580018A59F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E87F8864185AF11E007486D2 /* hudTest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudTest.png; sourceTree = "<group>"; };
+		E87F8865185AF11E007486D2 /* hudTest@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hudTest@2x.png"; sourceTree = "<group>"; };
 		E889B45C17B8D201002541C2 /* ALHUDIconsResourse.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ALHUDIconsResourse.bundle; sourceTree = "<group>"; };
 		E889B45D17B8D201002541C2 /* ALHUDManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALHUDManager.h; sourceTree = "<group>"; };
 		E889B45E17B8D201002541C2 /* ALHUDManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALHUDManager.m; sourceTree = "<group>"; };
@@ -112,6 +116,8 @@
 		E8D0AFE017B8D1BA002CDBD8 /* HUDManager */ = {
 			isa = PBXGroup;
 			children = (
+				E87F8864185AF11E007486D2 /* hudTest.png */,
+				E87F8865185AF11E007486D2 /* hudTest@2x.png */,
 				E8D0AFE917B8D1BA002CDBD8 /* AppDelegate.h */,
 				E8D0AFEA17B8D1BA002CDBD8 /* AppDelegate.m */,
 				E8D0AFF217B8D1BA002CDBD8 /* ViewController.h */,
@@ -193,8 +199,10 @@
 				E8D0AFED17B8D1BA002CDBD8 /* Default.png in Resources */,
 				E8D0AFEF17B8D1BA002CDBD8 /* Default@2x.png in Resources */,
 				E8D0AFF117B8D1BA002CDBD8 /* Default-568h@2x.png in Resources */,
+				E87F8867185AF11E007486D2 /* hudTest@2x.png in Resources */,
 				E8D0AFF717B8D1BA002CDBD8 /* ViewController.xib in Resources */,
 				E889B46117B8D201002541C2 /* ALHUDIconsResourse.bundle in Resources */,
+				E87F8866185AF11E007486D2 /* hudTest.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

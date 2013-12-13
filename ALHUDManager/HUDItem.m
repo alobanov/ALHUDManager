@@ -22,6 +22,7 @@
 		self.dimBackground = YES;
 		self.mode = ProgressHUDModeText;
     }
+    
     return self;
 }
 

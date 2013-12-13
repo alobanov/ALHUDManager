@@ -37,7 +37,7 @@ item.hideDelay = 7.0;
 - (void) showAlwaysOnTop;
  ```
 
- ## Contact
+## Contact
 
 Lobanov
 

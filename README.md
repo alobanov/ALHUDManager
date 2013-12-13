@@ -20,7 +20,7 @@ item.mode = ProgressHUDModeText;
 [ALHUDManager hideHud];
 ```
 
-## Set custom image
+### Set custom image
 
 ```objective-c
 HUDItem *item = [HUDItem itemWithTitle:@"Nice heart" andDetail:@"Smile bitch!"];
@@ -28,3 +28,18 @@ item.hudCustomImagePath = @"hudTest.png";
 item.hideDelay = 7.0;
 [ALHUDManager showHUD:item];
 ```
+
+### instance methods
+ ```objective-c
+- (void) setProgress:(float) value;
+- (void) setDetailText:(NSString *) text;
+- (void) updateHudView:(UIView *) hudView;
+- (void) showAlwaysOnTop;
+ ```
+
+ ## Contact
+
+Lobanov
+
+- http://github.com/alobanov
+- http://twitter.com/alobanov

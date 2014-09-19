@@ -293,10 +293,20 @@
 }
 
 - (void)moveToPoint:(CGPoint)newCenter rotateAngle:(CGFloat)angle {
-    self.hudView.transform = CGAffineTransformMakeRotation(angle);
-    float largeSide = MAX([[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
-    [self.hudView setFrame:CGRectMake(_hudView.frame.origin.x, _hudView.frame.origin.y, largeSide, largeSide)];
-    self.hudView.center = CGPointMake(newCenter.x + self.offsetFromCenter.horizontal, newCenter.y + self.offsetFromCenter.vertical);
+    if ([[UIDevice currentDevice] primarySystemVersion] > 7) {
+        [self moveToPointiOS8];
+    } else {
+        self.hudView.transform = CGAffineTransformMakeRotation(angle);
+        float largeSide = MAX([[UIScreen mainScreen] bounds].size.height, [[UIScreen mainScreen] bounds].size.width);
+        [self.hudView setFrame:CGRectMake(_hudView.frame.origin.x, _hudView.frame.origin.y, largeSide, largeSide)];
+        self.hudView.center = CGPointMake(newCenter.x + self.offsetFromCenter.horizontal, newCenter.y + self.offsetFromCenter.vertical);
+    }
+}
+
+- (void)moveToPointiOS8 {
+    CGRect orientationFrame = [self screenRect];
+    self.hudView.center = CGPointMake(orientationFrame.size.width*0.5,
+                                     orientationFrame.size.height*0.5);
 }
 
 @end

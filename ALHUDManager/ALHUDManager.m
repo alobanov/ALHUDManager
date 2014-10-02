@@ -293,7 +293,8 @@
 }
 
 - (void)moveToPoint:(CGPoint)newCenter rotateAngle:(CGFloat)angle {
-    if (IS_IOS8AndMore) {
+    BOOL isOS8AndMore = ([[UIDevice currentDevice] primarySystemVersion] > 7)?YES:NO;
+    if (isOS8AndMore) {
         [self moveToPointiOS8];
     } else {
         self.hudView.transform = CGAffineTransformMakeRotation(angle);

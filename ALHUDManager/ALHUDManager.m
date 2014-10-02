@@ -311,4 +311,9 @@
                                      orientationFrame.size.height*0.5);
 }
 
+- (CGRect)screenRect {
+    UIScreen *screen = [UIScreen mainScreen];
+    return screen.bounds;
+}
+
 @end

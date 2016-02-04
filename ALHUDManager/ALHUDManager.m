@@ -293,7 +293,9 @@
 }
 
 - (void)moveToPoint:(CGPoint)newCenter rotateAngle:(CGFloat)angle {
-    BOOL isOS8AndMore = ([[UIDevice currentDevice] primarySystemVersion] > 7)?YES:NO;
+    NSArray *vComp = [[UIDevice currentDevice].systemVersion componentsSeparatedByString:@"."];
+    int ver = [[vComp objectAtIndex:0] intValue];
+    BOOL isOS8AndMore = (ver > 7)?YES:NO;
     if (isOS8AndMore) {
         [self moveToPointiOS8];
     } else {

@@ -27,7 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		A9D307CE542944919DCACA86 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
+		95A394E97BD9F420546DD7E7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		CC521EC93CA1F9C1BEF9AFF3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		D398CF629DCF49D3A88DA4E7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E83453AB18473C580018A59F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E87F8864185AF11E007486D2 /* hudTest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudTest.png; sourceTree = "<group>"; };
@@ -70,6 +71,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		11EE9D7F5700BFD0EABA021A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				95A394E97BD9F420546DD7E7 /* Pods.debug.xcconfig */,
+				CC521EC93CA1F9C1BEF9AFF3 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E889B45B17B8D201002541C2 /* ALHUDManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -89,7 +99,7 @@
 				E8D0AFE017B8D1BA002CDBD8 /* HUDManager */,
 				E8D0AFD917B8D1BA002CDBD8 /* Frameworks */,
 				E8D0AFD817B8D1BA002CDBD8 /* Products */,
-				A9D307CE542944919DCACA86 /* Pods.xcconfig */,
+				11EE9D7F5700BFD0EABA021A /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -154,6 +164,7 @@
 				E8D0AFD417B8D1BA002CDBD8 /* Frameworks */,
 				E8D0AFD517B8D1BA002CDBD8 /* Resources */,
 				F104CBF10CFC4478B516BDCE /* Copy Pods Resources */,
+				7AF6B87BE5E3F5586CBFCDB4 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -209,6 +220,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		7AF6B87BE5E3F5586CBFCDB4 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		7FA5FB6DE43B4B3EA7AFE7DB /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -236,7 +262,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -334,7 +360,7 @@
 		};
 		E8D0AFFB17B8D1BA002CDBD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A9D307CE542944919DCACA86 /* Pods.xcconfig */;
+			baseConfigurationReference = 95A394E97BD9F420546DD7E7 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HUDManager/HUDManager-Prefix.pch";
@@ -346,7 +372,7 @@
 		};
 		E8D0AFFC17B8D1BA002CDBD8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A9D307CE542944919DCACA86 /* Pods.xcconfig */;
+			baseConfigurationReference = CC521EC93CA1F9C1BEF9AFF3 /* Pods.release.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HUDManager/HUDManager-Prefix.pch";

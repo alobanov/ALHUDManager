@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/alobanov/ALHUDManager"
   s.license      = { :type => "MIT", :file => "LICENSE" }
   s.author       = { "Alexey Lobanov" => "lobanov.aw@gmail.com" }
-  s.platform     = :ios, "7.0"
+  s.platform     = :ios, "8.0"
 
   s.source       = { :git => "https://github.com/alobanov/ALHUDManager.git" }
   s.source_files = "ALHUDManager/*.{h,m}"

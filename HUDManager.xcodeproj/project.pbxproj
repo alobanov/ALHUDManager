@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7901ACD4F8C64B5D8D493C1A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D398CF629DCF49D3A88DA4E7 /* libPods.a */; };
+		ACEC12C954D3F174D6E97712 /* libPods-HUDManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FBF6B61262A3B5FB46AA454E /* libPods-HUDManager.a */; };
 		E87F8866185AF11E007486D2 /* hudTest.png in Resources */ = {isa = PBXBuildFile; fileRef = E87F8864185AF11E007486D2 /* hudTest.png */; };
 		E87F8867185AF11E007486D2 /* hudTest@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E87F8865185AF11E007486D2 /* hudTest@2x.png */; };
 		E889B46117B8D201002541C2 /* ALHUDIconsResourse.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E889B45C17B8D201002541C2 /* ALHUDIconsResourse.bundle */; };
@@ -27,9 +27,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		95A394E97BD9F420546DD7E7 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		CC521EC93CA1F9C1BEF9AFF3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		D398CF629DCF49D3A88DA4E7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		9617D150415C862D568EA25C /* Pods-HUDManager.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HUDManager.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HUDManager/Pods-HUDManager.debug.xcconfig"; sourceTree = "<group>"; };
+		ADBDDC825A8133702E67DF10 /* Pods-HUDManager.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HUDManager.release.xcconfig"; path = "Pods/Target Support Files/Pods-HUDManager/Pods-HUDManager.release.xcconfig"; sourceTree = "<group>"; };
 		E83453AB18473C580018A59F /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		E87F8864185AF11E007486D2 /* hudTest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hudTest.png; sourceTree = "<group>"; };
 		E87F8865185AF11E007486D2 /* hudTest@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hudTest@2x.png"; sourceTree = "<group>"; };
@@ -54,6 +53,7 @@
 		E8D0AFF217B8D1BA002CDBD8 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		E8D0AFF317B8D1BA002CDBD8 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		E8D0AFF617B8D1BA002CDBD8 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		FBF6B61262A3B5FB46AA454E /* libPods-HUDManager.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HUDManager.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,18 +64,18 @@
 				E8D0AFDB17B8D1BA002CDBD8 /* UIKit.framework in Frameworks */,
 				E8D0AFDD17B8D1BA002CDBD8 /* Foundation.framework in Frameworks */,
 				E8D0AFDF17B8D1BA002CDBD8 /* CoreGraphics.framework in Frameworks */,
-				7901ACD4F8C64B5D8D493C1A /* libPods.a in Frameworks */,
+				ACEC12C954D3F174D6E97712 /* libPods-HUDManager.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		11EE9D7F5700BFD0EABA021A /* Pods */ = {
+		5DFE04BD6445E9BEBB1E5E91 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				95A394E97BD9F420546DD7E7 /* Pods.debug.xcconfig */,
-				CC521EC93CA1F9C1BEF9AFF3 /* Pods.release.xcconfig */,
+				9617D150415C862D568EA25C /* Pods-HUDManager.debug.xcconfig */,
+				ADBDDC825A8133702E67DF10 /* Pods-HUDManager.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -99,7 +99,7 @@
 				E8D0AFE017B8D1BA002CDBD8 /* HUDManager */,
 				E8D0AFD917B8D1BA002CDBD8 /* Frameworks */,
 				E8D0AFD817B8D1BA002CDBD8 /* Products */,
-				11EE9D7F5700BFD0EABA021A /* Pods */,
+				5DFE04BD6445E9BEBB1E5E91 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -118,7 +118,7 @@
 				E8D0AFDA17B8D1BA002CDBD8 /* UIKit.framework */,
 				E8D0AFDC17B8D1BA002CDBD8 /* Foundation.framework */,
 				E8D0AFDE17B8D1BA002CDBD8 /* CoreGraphics.framework */,
-				D398CF629DCF49D3A88DA4E7 /* libPods.a */,
+				FBF6B61262A3B5FB46AA454E /* libPods-HUDManager.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -159,12 +159,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E8D0AFFA17B8D1BA002CDBD8 /* Build configuration list for PBXNativeTarget "HUDManager" */;
 			buildPhases = (
-				7FA5FB6DE43B4B3EA7AFE7DB /* Check Pods Manifest.lock */,
+				16D79DF94824AD9CB7457AAE /* [CP] Check Pods Manifest.lock */,
 				E8D0AFD317B8D1BA002CDBD8 /* Sources */,
 				E8D0AFD417B8D1BA002CDBD8 /* Frameworks */,
 				E8D0AFD517B8D1BA002CDBD8 /* Resources */,
-				F104CBF10CFC4478B516BDCE /* Copy Pods Resources */,
-				7AF6B87BE5E3F5586CBFCDB4 /* Embed Pods Frameworks */,
+				0B6D20A991CBC606A5439B4B /* [CP] Embed Pods Frameworks */,
+				B9988104BAEB36B342CEF9B5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -220,49 +220,52 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7AF6B87BE5E3F5586CBFCDB4 /* Embed Pods Frameworks */ = {
+		0B6D20A991CBC606A5439B4B /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HUDManager/Pods-HUDManager-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7FA5FB6DE43B4B3EA7AFE7DB /* Check Pods Manifest.lock */ = {
+		16D79DF94824AD9CB7457AAE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HUDManager-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F104CBF10CFC4478B516BDCE /* Copy Pods Resources */ = {
+		B9988104BAEB36B342CEF9B5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-HUDManager/Pods-HUDManager-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -360,11 +363,12 @@
 		};
 		E8D0AFFB17B8D1BA002CDBD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 95A394E97BD9F420546DD7E7 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 9617D150415C862D568EA25C /* Pods-HUDManager.debug.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HUDManager/HUDManager-Prefix.pch";
 				INFOPLIST_FILE = "HUDManager/HUDManager-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -372,11 +376,12 @@
 		};
 		E8D0AFFC17B8D1BA002CDBD8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CC521EC93CA1F9C1BEF9AFF3 /* Pods.release.xcconfig */;
+			baseConfigurationReference = ADBDDC825A8133702E67DF10 /* Pods-HUDManager.release.xcconfig */;
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HUDManager/HUDManager-Prefix.pch";
 				INFOPLIST_FILE = "HUDManager/HUDManager-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

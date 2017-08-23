@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ALHUDManager"
-  s.version      = "1.0.0"
+  s.version      = "2.0.0"
   s.summary      = "Manager for localizable strings"
   s.homepage     = "https://github.com/alobanov/ALHUDManager"
   s.license      = { :type => "MIT", :file => "LICENSE" }

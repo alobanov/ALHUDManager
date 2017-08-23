@@ -63,7 +63,7 @@
 
 - (void) setDetailText:(NSString *) text {
     if (!self.HUD) return;
-    [self.HUD setDetailsLabelText:text];
+    self.HUD.detailsLabel.text = text;
 }
 
 #pragma mark - Public static methods
@@ -108,7 +108,7 @@
 	_HUD.dimBackground = YES;
 	_HUD.delegate = self;
     [_hudView setHidden:NO];
-    [_HUD show:YES];
+    [_HUD showAnimated:YES];
 }
 
 - (void) createModalView {
@@ -165,8 +165,9 @@
     [_hudView setHidden:NO];
 	[_HUD setHidden:NO];
 	
-	[_HUD setLabelText:item.title];
-	[_HUD setDetailsLabelText:item.detail];
+    _HUD.label.text = item.title;
+    _HUD.detailsLabel.text = item.detail;
+    
     [_HUD setDimBackground:item.dimBackground];
 	
     if (item.hudCustomImagePath) {
@@ -188,7 +189,8 @@
 		item.mode != MBProgressHUDModeAnnularDeterminate &&
 		item.mode != MBProgressHUDModeDeterminateHorizontalBar &&
 		item.mode != MBProgressHUDModeIndeterminate) {
-		[_HUD hide:YES afterDelay:item.hideDelay];
+        
+        [_HUD hideAnimated:YES afterDelay:item.hideDelay];
 	}
 }
 
